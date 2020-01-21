@@ -1,7 +1,4 @@
-;;
-;;system hederfile path
-;;
-; check-ccl-program OS type
+;;; System hederfile path
 (cond
  ((string-equal system-type "cygwin") ; Microsoft Windows
   (progn
