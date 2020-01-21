@@ -4,13 +4,13 @@
   :config
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t))
-        
+
 (use-package multiple-cursors)
 
 (use-package vi-tilde-fringe
    :config
    (global-vi-tilde-fringe-mode))
-   
+
 (use-package undo-tree
   :config
   (global-undo-tree-mode))
@@ -31,16 +31,16 @@
 
 (use-package whitespace
   :ensure t
-  ;:hook 
+  ;:hook
   ;((prog-mode text-mode) . whitespace-mode)
-  :custom-face 
-  (whitespace-line ((t (:background "gray90"))))
-  :custom 
+  ;:custom-face
+  ;(whitespace-line ((t (:background "gray90"))))
+  :custom
   (whitespace-line-column 80)
   (whitespace-style '(face tabs empty trailing lines-tail))
   :config
   (global-whitespace-mode))
-          
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;CONFIGURE;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -52,7 +52,7 @@
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
-  
+
 ;;; utf-8
 (setq locale-coding-system 'utf-8)
 (set-terminal-coding-system 'utf-8)
@@ -61,7 +61,7 @@
 (prefer-coding-system 'utf-8)
 
 ;; Custom name
-(setq frame-title-format "DOTEMACS: %b")
+(setq frame-title-format "Dotmacs: %b")
 
 ;; Highlight line color
 (global-hl-line-mode)
@@ -176,4 +176,3 @@
 (add-hook 'emacs-lisp-mode-hook 'conf:project-load)
 (add-hook 'c-mode-hook 'conf:project-load)
 (add-hook 'c++-mode-hook 'conf:project-load)
-  
