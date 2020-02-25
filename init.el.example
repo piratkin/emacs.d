@@ -1,7 +1,63 @@
+;; Set title
+(setq-default
+ frame-title-format
+ '("DotMacs "
+   (:eval (if (buffer-modified-p)
+              " "))
+   "[%m] "
+   (:eval (if (buffer-file-name)
+              (abbreviate-file-name (buffer-file-name))
+            "%b"))))
+
+;;; Set dark background
+(set-background-color "#282c34")
+(set-foreground-color "#a9afaa")
+
+;; Opt out from the startup message in the echo area by simply disabling this
+;; ridiculously bizarre thing entirely.
+(fset 'display-startup-echo-area-message #'ignore)
+
+;; Hide compile warnings
+;; (setq-default warning-minimum-level 'error)
+;; (setq warning-minimum-level :error)
+
+;; (put 'inhibit-startup-echo-area-message 'saved-value t)
+;; (setq inhibit-startup-echo-area-message (user-login-name))
+
+;; ;; Yes, it's disgusting, but it's a portable way to disable that silly message
+;; (put 'inhibit-startup-echo-area-message 'saved-value
+;;      (setq inhibit-startup-echo-area-message (user-login-name)))
+
+;;; Turn off mouse interface early in startup to avoid momentary display
+(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+
+;;; Configure
+(setq mode-line-format nil ; Hide modeline
+      ; Disable automatic loading of packages after the init file
+      package-enable-at-startup nil
+      frame-inhibit-implied-resize t ; Does not resize that frame
+      gc-cons-threshold 50000000 ; Increase garbage collection cache
+      inhibit-startup-screen t ; Hide startup message for older version Emacs
+      inhibit-startup-message t ; Hide startup message
+      initial-scratch-message "") ; No scratch message
+
+;; Change startup message
+(defun display-startup-echo-area-message () nil)
+;; (defun display-startup-echo-area-message () (message ""))
+
 ;; Init file for custom settings
 (setq custom-file "~/.emacs.d/custom.el")
+(when (file-exists-p custom-file)
+  (load custom-file))
 
-;;; Set path
+;; ;;; Start as server
+;; (require 'server)
+;; (unless (server-running-p)
+;;   (server-start))
+
+;;; Set load path
 (push "~/.dotmacs.d" load-path)
 
 ;;; System configuration
@@ -10,8 +66,6 @@
 ;;; Install packages
 (require 'preload)
 
-;;; Configure
-(require 'rconf)
+
 
 (provide 'init)
-(put 'dired-find-alternate-file 'disabled nil)
