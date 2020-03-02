@@ -2,16 +2,16 @@
 (defun rc:init-dired-conf ()
   (interactive)
   (setq-default
-   truncate-lines t
-   auto-fill-mode t
-   ;; dired-hide-details-mode t
    ;; dired-ls-F-marks-symlinks t
-   dired-omit-mode t))
+   truncate-lines t))
 
 (use-package dired
   :ensure nil
   :hook
-  (dired-mode . rc:init-dired-conf)
+  ((dired-mode . rc:init-dired-conf)
+   (dired-mode . auto-fill-mode)
+   (dired-mode . dired-hide-details-mode)
+   (dired-mode . dired-omit-mode))
   :config
   ;; Dired - reuse current buffer by pressing 'a'
   (put 'dired-find-alternate-file 'disabled nil)

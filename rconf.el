@@ -5,18 +5,18 @@
 (require 'init-evil)
 (require 'init-doom-themes)
 (require 'init-doom-modeline)
-(require 'init-yascroll)
+;(require 'init-yascroll)
 (require 'init-font-lock)
 (require 'init-xclip)
 (require 'init-diminish)
 (require 'init-dired)
 (require 'init-ace-jump-mode)
 (require 'init-golden-ratio)
-(require 'init-reverse-im)
 (require 'init-paren-face)
 (require 'init-frame)
 (require 'init-zoom-window)
 (require 'init-auto-complete)
+;; (require 'init-reverse-im)
 
 ;; Extendend Packages
 (require 'init-base) ;; todo; clean and muve to basic section
@@ -59,6 +59,8 @@
 (require 'init-web-search)
 (require 'init-pretty-mode)
 (require 'init-bug-hunter)
+(require 'init-line-number)
+(require 'init-ibuffer)
 
 ;; Unconfigured Packages
 ;; (require 'init-column-marker)
@@ -77,7 +79,6 @@
 ;; (require 'init-avy)
 ;; (require 'init-recentf)
 ;; (require 'init-auto-compile)
-;; (require 'init-nlinum)
 ;; (require 'init-server)
 
 

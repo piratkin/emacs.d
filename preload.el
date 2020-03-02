@@ -1,4 +1,5 @@
 (require 'package)
+(setq package-check-signature nil)
 
 ;; Sources for installing packages
 (setq package-archives

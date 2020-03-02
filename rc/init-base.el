@@ -448,6 +448,9 @@
 ;; Set short confirm command
 (fset 'yes-or-no-p 'y-or-n-p)
 
+;; ;; Always use ibuffer
+;; (defalias 'list-buffers 'ibuffer)
+
 ;; Unbind C-z
 (when window-system
   (global-unset-key [(control z)]))

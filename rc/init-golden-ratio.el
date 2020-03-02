@@ -2,7 +2,7 @@
   :ensure t
   ;; :diminish golden-ratio-mode
   :init
-  (setq ;golden-ratio-auto-scale t
+  (setq golden-ratio-auto-scale t
         golden-ratio-extra-commands
         '(ace-jump-move
           ace-window
