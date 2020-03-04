@@ -16,6 +16,8 @@
 (require 'init-frame)
 (require 'init-zoom-window)
 (require 'init-auto-complete)
+(require 'init-which-key)
+(require 'init-general)
 ;; (require 'init-reverse-im)
 
 ;; Extendend Packages
@@ -24,7 +26,6 @@
 (require 'init-whitespace)
 (require 'init-undo-tree)
 (require 'init-markdown)
-(require 'init-which-key)
 (require 'init-multiple-cursors)
 (require 'init-saveplace)
 (require 'init-paren)
@@ -61,6 +62,7 @@
 (require 'init-bug-hunter)
 (require 'init-line-number)
 (require 'init-ibuffer)
+(require 'init-time)
 
 ;; Unconfigured Packages
 ;; (require 'init-column-marker)

@@ -3,7 +3,7 @@
   ;; :diminish which-key-mode)
   :config
   (which-key-setup-minibuffer)
-  (setq which-key-idle-delay 0.3
+  (setq which-key-idle-delay 0.5
         which-key-idle-secondary-delay 0.05
         which-key-show-early-on-C-h t
         which-key-prefix-prefix "+"

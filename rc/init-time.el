@@ -1,5 +1,5 @@
 (use-package time                       ; Show current time
-  :bind (("C-c a c" . display-time-world))
+  ;; :bind (("C-c a c" . display-time-world))
   :config
     ;; (display-time-mode t)
   (setq display-time-world-time-format "%H:%M, %d. %b -  %Z"
@@ -11,3 +11,7 @@
                                   ("Europe/Minsk"     "Belarus")
                                   ("Europe/Moscow"    "Russia")
                                   ("Asia/Shanghai"    "China"))))
+
+
+
+(provide 'init-time)
