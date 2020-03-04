@@ -5,7 +5,6 @@
 (require 'init-evil)
 (require 'init-doom-themes)
 (require 'init-doom-modeline)
-;(require 'init-yascroll)
 (require 'init-font-lock)
 (require 'init-xclip)
 (require 'init-diminish)
@@ -13,11 +12,11 @@
 (require 'init-ace-jump-mode)
 (require 'init-golden-ratio)
 (require 'init-paren-face)
-(require 'init-frame)
 (require 'init-zoom-window)
 (require 'init-auto-complete)
 (require 'init-which-key)
 (require 'init-general)
+;; (require 'init-yascroll)
 ;; (require 'init-reverse-im)
 
 ;; Extendend Packages
@@ -61,8 +60,9 @@
 (require 'init-pretty-mode)
 (require 'init-bug-hunter)
 (require 'init-line-number)
-(require 'init-ibuffer)
 (require 'init-time)
+(require 'init-editorconfig)
+(require 'init-git-timemachine)
 
 ;; Unconfigured Packages
 ;; (require 'init-column-marker)
@@ -82,7 +82,7 @@
 ;; (require 'init-recentf)
 ;; (require 'init-auto-compile)
 ;; (require 'init-server)
-
-
+;; (require 'init-frame)
+;; (require 'init-ibuffer)
 
 (provide 'rconf)

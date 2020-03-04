@@ -510,6 +510,8 @@
 ;;   ;; increase contrast between similar colors
 ;;   (shr-color-visible-luminance-min 60))
 
+;; (setq default-input-method "russian-computer")
+
 (use-package systemd)
 
 ;; View Large Files
@@ -521,10 +523,6 @@
 ;; Case-insensitive search
 (setq case-fold-search t)
 
-(use-package git-timemachine
-  :bind
-  (("C-c g t" . git-timemachine)
-   ("H-t" . git-timemachine)))
 
 (use-package shackle
   :config
@@ -533,10 +531,6 @@
         '(("*Apropos*" :align below :size 16 :select t)
           ("*Help*" :align below :size 16 :select t))))
 
-(use-package editorconfig
-  ;; :diminish editorconfig-mode
-  :config
-  (editorconfig-mode 1))
 
 
 (provide 'init-base)

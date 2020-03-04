@@ -6,7 +6,7 @@
   :custom
   (column-number-mode t)
   (find-file-visit-truename t)
-  (doom-modeline-icon nil)
+  ;; (doom-modeline-icon t)
   (doom-modeline-unicode-fallback t)
   ;; (doom-modeline-minor-modes t)
   ;; (doom-modeline-enable-word-count t)
@@ -24,7 +24,7 @@
   (set-face-foreground 'doom-modeline-evil-visual-state "#eead0e") ;; yellow
   :init
   ;; (setq doom-modeline-height 30)
-  ;; (setq doom-modeline-modal-icon t)
+  (setq doom-modeline-modal-icon t)
   (setq doom-modeline-bar-width 3)
   (doom-modeline-mode t))
 

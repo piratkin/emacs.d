@@ -11,9 +11,11 @@
    :keymaps 'override
    ;; Main menu
    "f" '(:ignore t :which-key "Files")
+   "fl" '(:ignore t :which-key "Locate")
    "w" '(evil-window-map :which-key "Windows")
    "b" '(:ignore t :which-key "Buffers")
    "d" '(:ignore t :which-key "Dired")
+   "g" '(:ignore t :which-key "Git")
    "t" '(:ignore t :which-key "Terminal")
    "j" '(:ignore t :which-key "Jump")
    "e" '(:ignore t :which-key "Edit")
@@ -28,55 +30,53 @@
    ;; Files
    "ff" '(counsel-find-file :which-key "Find file")
    "fg" '(counsel-git :which-key "Find in git dir")
-   "fh" '(bug-hunter-file :which-key "Bug hunter file")
-   "fH" '(bug-hunter-init-file :which-key "Bug hunter init")
+   "fb" '(bug-hunter-file :which-key "Bug hunter file")
+   "fB" '(bug-hunter-init-file :which-key "Bug hunter init")
    "fll" '(locate :which-key "Locate")
    "fls" '(locate-library :which-key "Locate lib")
-   ;; "flf" '(locate-file :which-key "Locate file")
-   ;; "flt" '(locate-tags :which-key "Locate tag")
-   ;; "flc" '(locate-command :which-key "Locate command")
-   ;; "fld" '(locate-find-directory :which-key "Locate dir")
-   ;; "flD" '(locate-find-directory-other-window :which-key "Locate new windir")
    ;; Buffers
    "bb" '(counsel-buffer-or-recentf :which-key "Recent Buffer")
    "bk" '(kill-this-buffer :which-key "Buffer kill")
    "bz" '(zoom-window-zoom :which-key "Zoom curent buffer")
    "bs" '(save-buffer :which-key "Save buffer")
    "bS" '(save-some-buffers :which-key "Save all")
-   ;; "bf" '(toggle-frame-fullscreen :which-key "Toggle fullscreen")
-   ;; "bm" '(toggle-frame-maximized :which-key "Toggle maximize")
+   "bx" '(eval-buffer :which-key "Buffer execute")
    ;; Dired
    "dd" '(counsel-dired :which-key "Open Dired buffer")
+   ;; Git
+   "gh" '(git-timemachine :which-key "Git history")
+   ;; "gm" '(git-timemachine-mode-map :which-key "Git history")
    ;; Terminal
    "tt" '(shell :which-key "Shell")
    "te" '(eshell :which-key "Emacs Lisp Shell")
    "ta" '(ansi-term :which-key "Ansi Term")
    ;; Edit
-   "eu" '(undo-tree-visualize :which-key "Visual undo-tree")
+   "eu" '(undo-tree-visualize :which-key "Undo-tree view")
    ;; Jump
    "jj" '(ace-jump-word-mode :which-key "Jump to word")
    "jl" '(ace-jump-line-mode :which-key "Jump to line")
    "jc" '(ace-jump-char-mode :which-key "Jump to char")
    "jg" '(dumb-jump-go :which-key "Jump to def")
-   "jG" '(dumb-jump-go-other-window :which-key "Jumpdef ext win")
+   "jG" '(dumb-jump-go-other-window :which-key "Jump def ext")
    "jb" '(dumb-jump-back :which-key "Jump back")
+   ;; Search
+   "ss" '(web-search :which-key "Web search")
    ;; System
    "xs" '(sudo-edit :which-key "Sudo edit")
-   ;; "xf" '(sudo-edit-current-file :which-key "Sudo curent")
+   "xx" '(save-buffers-kill-emacs :which-key "Save & exit")
+   "xr" '(restart-emacs :which-key "Restart")
+   "xm" '(memory-usage :which-key "Memory usage")
    ;; Other
    "aa" '(counsel-M-x :which-key "M-x")
-   "az" '(text-scale-increase :which-key "Zoom +")
-   "aZ" '(text-scale-decrease :which-key "Zoom -")
-   "a0" '(text-scale-adjust :which-key "Zoom reset")
-   "ax" '(save-buffers-kill-termina :which-key "Save and exit")
-   "ar" '(restart-emacs :which-key "Restart emacs")
-   "am" '(memory-usage :which-key "Memory usage")
+   "az" '(text-scale-increase :which-key "Zoom (+)")
+   "aZ" '(text-scale-decrease :which-key "Zoom (-)")
+   "a=" '(text-scale-adjust :which-key "Zoom (=)")
    "at" '(display-time-world :which-key "World time")
    ;; Help
    "hh" '(help-command :which-key "Help")
    "hd" '(dash-at-point :which-key "Dash at point")
    "hD" '(dash-at-point-with-docset :which-key "Dash with docset")
-   ;;
+   ;; Internet
    "ii" '(eww :which-key "Emacs Web Wowser")
    "ib" '(eww-list-bookmarks :which-key "Eww bookmarks")
    "il" '(eww-browse-url :which-key "Eww link")

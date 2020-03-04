@@ -45,7 +45,9 @@
    ;;
    ;; (setq use-package-always-defer t)
    ;; Automatically install missing packages
-   use-package-always-ensure t))
+   use-package-always-ensure t
+   ;;
+   use-package-minimum-reported-time 0))
 
 (eval-when-compile
   (require 'use-package))
