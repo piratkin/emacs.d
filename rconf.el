@@ -63,6 +63,8 @@
 (require 'init-time)
 (require 'init-editorconfig)
 (require 'init-git-timemachine)
+(require 'init-popup)
+;; (require 'auto-complete-c-headers)
 
 ;; Unconfigured Packages
 ;; (require 'init-column-marker)

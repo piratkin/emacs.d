@@ -56,11 +56,12 @@
    "jj" '(ace-jump-word-mode :which-key "Jump to word")
    "jl" '(ace-jump-line-mode :which-key "Jump to line")
    "jc" '(ace-jump-char-mode :which-key "Jump to char")
-   "jg" '(dumb-jump-go :which-key "Jump to def")
-   "jG" '(dumb-jump-go-other-window :which-key "Jump def ext")
-   "jb" '(dumb-jump-back :which-key "Jump back")
    ;; Search
-   "ss" '(web-search :which-key "Web search")
+   "sw" '(web-search :which-key "Web search")
+   "sd" '(dumb-jump-go :which-key "Jump to def")
+   "sD" '(dumb-jump-go-other-window :which-key "Jump def ext")
+   "sb" '(dumb-jump-back :which-key "Jump back")
+   "sp" '(dumb-jump-go-prompt :which-key "Jump to prompt")
    ;; System
    "xs" '(sudo-edit :which-key "Sudo edit")
    "xx" '(save-buffers-kill-emacs :which-key "Save & exit")
