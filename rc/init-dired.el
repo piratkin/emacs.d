@@ -10,8 +10,8 @@
   :hook
   ((dired-mode . rc:init-dired-conf)
    (dired-mode . auto-fill-mode)
-   (dired-mode . dired-hide-details-mode)
-   (dired-mode . dired-omit-mode))
+   ;; (dired-mode . dired-omit-mode)
+   (dired-mode . dired-hide-details-mode))
   :config
   ;; Dired - reuse current buffer by pressing 'a'
   (put 'dired-find-alternate-file 'disabled nil)

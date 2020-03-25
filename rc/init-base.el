@@ -440,8 +440,10 @@
 (setq redisplay-dont-pause t)
 
 ;; Use system clipboard
-(setq x-select-enable-clipboard t)
-(setq interprogram-paste-function 'x-selection-value)
+(custom-set-variables
+ '(interprogram-paste-function (quote x-cut-buffer-or-selection-value) t)
+ '(x-select-enable-clipboard t))
+;; (setq interprogram-paste-function 'x-selection-value)
 ;; text selected with the mouse is automatically copied to the system clipboard
 (setq mouse-drag-copy-region t)
 

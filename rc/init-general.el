@@ -56,6 +56,7 @@
    "jj" '(ace-jump-word-mode :which-key "Jump to word")
    "jl" '(ace-jump-line-mode :which-key "Jump to line")
    "jc" '(ace-jump-char-mode :which-key "Jump to char")
+   ;; "js" '(eassist-switch-h-cpp :which-key "Header\Source")
    ;; Search
    "sw" '(web-search :which-key "Web search")
    "sd" '(dumb-jump-go :which-key "Jump to def")
@@ -82,6 +83,10 @@
    "ib" '(eww-list-bookmarks :which-key "Eww bookmarks")
    "il" '(eww-browse-url :which-key "Eww link")
    ))
+
+
+
+(provide 'init-general)
 
 
 

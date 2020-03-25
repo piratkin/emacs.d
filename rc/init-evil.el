@@ -22,7 +22,8 @@
         ;; evil-search-module 'evil-search
         evil-search-module 'isearch
         ;; evil-ex-substitute-global t
-        evil-want-fine-undo 'no)
+        evil-want-fine-undo 'no
+        evil-kill-on-visual-paste nil)
   :custom
   (evil-default-cursor '(box "magenta"))
   (evil-insert-state-cursor '(hollow "#28def0")) ;; green
@@ -109,10 +110,18 @@
   :after evil
   :ensure t
   :bind
-  (:map evil-insert-state-map ("C-g" . evil-escape))
-  (:map evil-replace-state-map ("C-g" . evil-escape))
-  (:map evil-visual-state-map ("C-g" . evil-escape))
-  (:map evil-operator-state-map ("C-g" . evil-escape))
+  (:map evil-insert-state-map
+        ("C-g" . evil-escape)
+        ("ESC" . evil-escape))
+  (:map evil-replace-state-map
+        ("C-g" . evil-escape)
+        ("ESC" . evil-escape))
+  (:map evil-visual-state-map
+        ("C-g" . evil-escape)
+        ("ESC" . evil-escape))
+  (:map evil-operator-state-map
+        ("C-g" . evil-escape)
+        ("ESC" . evil-escape))
   :config
   (evil-escape-mode 1)
   (setq-default evil-escape-key-sequence "tn"
