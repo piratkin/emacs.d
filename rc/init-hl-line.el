@@ -1,7 +1,7 @@
 (use-package hl-line
   :ensure t
   :hook
-  ((prog-mode dired-mode) . hl-line-mode)
+  ((prog-mode dired-mode markdown-mode) . hl-line-mode)
   :config
   ;; Highlight the line only in the active window
   (setq hl-line-sticky-flag nil)

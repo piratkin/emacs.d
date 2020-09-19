@@ -1,3 +1,5 @@
+;; (message "script: %s" "init-base.el")
+
 ;; (set-face-attribute 'fringe nil :background "red")
 ;; (add-to-list 'default-frame-alist '(left-fringe . 11))
 ;; (add-to-list 'default-frame-alist '(right-fringe . 0))
@@ -343,7 +345,8 @@
 
 
 (use-package bash-completion
-  :init
+  :ensure t
+  :config
   (bash-completion-setup))
 
 ;; (use-package editorconfig
@@ -366,7 +369,6 @@
   (set-charset-priority 'unicode))
 ;; (prefer-coding-system 'utf-8)
 (prefer-coding-system 'utf-8-unix)
-;; (set-language-environment 'utf-8)
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8)
 (set-buffer-file-coding-system 'utf-8)
@@ -402,26 +404,47 @@
 ;; https://github.com/dakrone/eos/blob/master/eos.org
 (setq save-interprogram-paste-before-kill t)
 
-;; Normal mouse wheele
-(setq mouse-wheel-scroll-amount '(2 ((shift) . 2)))
-(setq mouse-wheel-progressive-speed nil)
-(setq mouse-wheel-follow-mouse 't)
+;; ;; (setq mouse-wheel-scroll-amount '(2 ((shift) . 2)))
+;; ;; (setq mouse-wheel-scroll-amount '(5 ((shift) . 1) ((control) . nil)))
+;; ;; (setq mouse-wheel-scroll-amount '(1 ((shift) . 5) ((control))))
+;; (setq mouse-wheel-progressive-speed nil)
+;; (setq mouse-wheel-progressive-speed t)
+;; (setq mouse-wheel-follow-mouse t)
+;; (setq auto-window-vscroll nil)
+;; ;; Mouse wheel scroll support
+;; ;; (mouse-wheel-mode t)
+;; ;; При прокрутке применять font-lock не сразу, а после небольшой задежки.
+;; ;; (setq jit-lock-defer-time .01)
+;; ;; Опционально: никогда не прокручивать более, чем на 1 строку при перемещении курсора за
+;; ;; нижнюю или верхнюю границу экрана.
+;; ;; (setq scroll-conservatively 10000)
+;; ;; (setq mouse-wheel-scroll-amount '(1))
+;; ;; (setq mouse-wheel-progressive-speed nil)
+;; ;; (setq scroll-margin 1
+;; ;;       scroll-conservatively 0
+;; ;;       scroll-up-aggressively 0.01
+;; ;;       scroll-down-aggressively 0.01)
+;; (setq-default scroll-up-aggressively 0.01
+;;       scroll-down-aggressively 0.01)
+;; ;; (setq scroll-conservatively 10000)
+;; (use-package pixel-scroll
+;;   :ensure nil
+;;   :config
+;;   ;; (setq pixel-dead-time 0
+;;   ;;       pixel-resolution-fine-flag nil)
+;;   (pixel-scroll-mode))
 
-;; Indent settings
-(setq c-default-style "stroustrup") ;;indent style in c/c++ code
-(setq-default indent-tabs-mode nil) ;;disable the ability to indent TAB
-(setq-default tab-width 4) ;;tab width - 4 whitespace
-(setq-default c-basic-offset 4)
-(setq-default standart-indent 4) ;;standard width of indent - 4 whitespace
-
-; A bit more spacing between lines
-;; (setq-default line-spacing 0.1)
+;; ;; Normal mouse wheele
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
+;; ;; Automatically scroll *compilation* buffer
+(setq compilation-scroll-output t)
+(setq scroll-step 1)
 
 (setq-default fill-column 80)
 (auto-fill-mode t)
 
-;; Kill current buffet with out prompt messate
-(global-set-key (kbd "C-x k") 'kill-this-buffer)
+;; ;; Kill current buffet with out prompt messate
+;; (global-set-key (kbd "C-x k") 'kill-this-buffer)
 
 ;; Highlight search resaults
 (setq search-highlight t)
@@ -463,14 +486,30 @@
 ;; Set build command
 (setq compile-command "cd ../build && cmake -G \"Unix Makefiles\" -DCMAKE_EXPORT_COMPILE_COMMANDS=YES .. && cmake --build .")
 
+;; (defun ar/compile-autoclose (buffer string)
+;;   "Hide successful builds window with BUFFER and STRING."
+;;   (cond ((string-match "finished" string)
+;;          (message "Build finished")
+;;          (run-with-timer 2 nil
+;;                          #'delete-window
+;;                          (get-buffer-window buffer t)))
+;;         (t
+;;          (next-error)
+;;          (when (equal major-mode 'objc-mode)
+;;            (next-error))
+;;          (message "Compilation exited abnormally: %s" string))))
+;; (use-package compile
+;;   :config
+;;   ;; TODO: Shouldn't this
+;;   ;; Automatically hide successful builds window.
+;;   (setq compilation-finish-functions #'ar/compile-autoclose))
+
 ;; Move the cursor to a new window after C-x,2
 (setq split-window-keep-point t)
 
 ;;
 ;; (setq apropos-do-all t)
 
-;; Automaticaly scroll *compilation* bufferl
-(setq compilation-scroll-output t)
 
 ;; Show size in modeline bar
 (size-indication-mode t)
@@ -484,6 +523,11 @@
   (setq-default truncate-lines 1))
 ;; Set hooks
 (add-hook 'prog-mode-hook 'rc:init-base-conf)
+(add-hook 'term-mode-hook 'compilation-shell-minor-mode)
+(add-hook 'shell-mode-hook 'compilation-shell-minor-mode)
+
+;; Don’t compact font caches during GC.
+(setq inhibit-compacting-font-caches t)
 
 ;; Delete excess backup versions silently
 (setq delete-old-versions -1)
@@ -496,7 +540,6 @@
 (setq backup-directory-alist `(("." . "~/.emacs.d/backups")))
 ;; Transform backups file name
 (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
-
 
 ;; (use-package ipretty
 ;;   :config (ipretty-mode t))
@@ -514,10 +557,12 @@
 
 ;; (setq default-input-method "russian-computer")
 
-(use-package systemd)
+(use-package systemd
+  :ensure t)
 
 ;; View Large Files
 (use-package vlf
+  :ensure t
   :init
   (setq vlf-application 'dont-ask)   ;just do it
   (setq vlf-batch-size 8192))        ;a bit more text per batch please
@@ -526,13 +571,197 @@
 (setq case-fold-search t)
 
 
+
 (use-package shackle
+  :ensure t
   :config
   (shackle-mode 1)
   (setq shackle-rules
         '(("*Apropos*" :align below :size 16 :select t)
           ("*Help*" :align below :size 16 :select t))))
 
+;; Weather forecast (no login/account needed).
+(use-package wttrin
+  :ensure t
+  :commands wttrin
+  :config
+  (setq wttrin-default-accept-language '("Accept-Language" . "ru-RU")
+        wttrin-default-cities (list "Grodno" "Minsk")))
+
+;; (use-package deft
+;;   :after org
+;;   ;; :bind
+;;   ;; ("C-c n d" . deft)
+;;   :custom
+;;   (deft-recursive t)
+;;   (deft-use-filter-string-for-filename t)
+;;   (deft-default-extension "org")
+;;   (deft-directory "~/Documents/Roam"))
+
+(use-package xterm-color
+  :ensure t)
+
+;; (use-package ansi-color
+;;   :config
+;;   (progn
+;;     (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
+;;     (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)))
+
+;; (use-package buffer-move
+;;   :ensure t
+;;   :bind
+;;   ("C-s-<up>" . buf-move-up)
+;;   ("C-s-<down>" . buf-move-down)
+;;   ("C-s-<left>" . buf-move-left)
+;;   ("C-s-<right>" . buf-move-right))
+;; (use-package windmove
+;;   :ensure t
+;;   :init (windmove-default-keybindings)
+;;   :config
+;;   :bind (:map leader-key
+;;               ("w f" . #'windmove-right)
+;;               ("w b" . #'windmove-left)
+;;               ("w p" . #'windmove-up)
+;;               ("w n" . #'windmove-down)))
+
+;; (use-package perspeen
+;;   :ensure t
+;;   :init
+;;   (setq perspeen-use-tab t)
+;;   :config
+;;   (perspeen-mode))
+
+;; (use-package benchmark-init
+;;   :ensure t
+;;   :defer 5
+;;   :config
+;;   (add-hook 'after-init-hook 'benchmark-init/deactivate))
+
+;; (use-package esup
+;;   :ensure nil
+;;   ;; To use MELPA Stable use ":pin mepla-stable",
+;;   ;; :pin melpa
+;;   :load-path  "~/.dotmacs.d/usr/esup"
+;;   :commands (esup))
+
+;; Format table M-x pakege-list-packages
+(add-hook 'package-menu-mode-hook
+          (lambda()
+            (setq tabulated-list-format
+                  [("Package"     40 package-menu--name-predicate)
+                   ("Version"     13 package-menu--version-predicate)
+                   ("Status"       9 package-menu--status-predicate)
+                   ("Archive"     12 package-menu--archive-predicate)
+                   ("Description" 64 package-menu--description-predicate)])
+            (tabulated-list-init-header)))
+
+;; Returns the root directory .dir_locals.el
+(defun rc:dir-locals-dir ()
+  "Return the directory local variables directory.
+Code taken from `hack-dir-local-variables'."
+  (let ((variables-file (dir-locals-find-file (or (buffer-file-name) default-directory)))
+        (dir-name nil))
+    (cond
+     ((stringp variables-file)
+      (setq dir-name (file-name-directory variables-file)))
+     ((consp variables-file)
+      (setq dir-name (nth 0 variables-file))))
+    dir-name))
+
+;; (use-package insert-translated-name
+;;   :ensure nil
+;;   ;; :init
+;;   ;; (evil-leader/set-key
+;;   ;;   "tr" 'insert-translated-name-replace
+;;   ;;   "ti" 'insert-translated-name-insert)
+;;   ;; :commands (insert-translated-name-insert
+;;   ;;            insert-translated-name-replace)
+;;   :config
+;;   (setq insert-translated-name-default-style "origin")
+;;   (setq insert-translated-name-line-style-mode-list '())
+;;   (setq insert-translated-name-camel-style-mode-list '())
+;;   (setq insert-translated-name-underline-style-mode-list '()))
 
 
+;; (use-package so-long
+;;   :quelpa (so-long :url "https://raw.githubusercontent.com/emacs-mirror/emacs/master/lisp/so-long.el" :fetcher url)
+;;   :config (global-so-long-mode))
+
+;; (use-package rotate
+;;   :ensure t
+;;   :bind
+;;   ;; ("C-c C-r w" . rotate-window)
+;;   ;; ("C-c C-r l" . rotate-layout)
+;;   )
+
+;; Rename current buffer and file
+(defun rc:rename-current-buffer-file ()
+  "Renames current buffer and file it is visiting."
+  (interactive)
+  (let ((name (buffer-name))
+        (filename (buffer-file-name)))
+    (if (not (and filename (file-exists-p filename)))
+        (error "Buffer '%s' is not visiting a file!" name)
+      (let ((new-name (read-file-name "New name: " filename)))
+        (if (get-buffer new-name)
+            (error "A buffer named '%s' already exists!" new-name)
+          (rename-file filename new-name 1)
+          (rename-buffer new-name)
+          (set-visited-file-name new-name)
+          (set-buffer-modified-p nil)
+          (message "File '%s' successfully renamed to '%s'"
+                   name (file-name-nondirectory new-name)))))))
+
+;; (defun toggle-fold ()
+;;   "Toggle fold all lines larger than indentation on current line"
+;;   (interactive)
+;;   (let ((col 1))
+;;     (save-excursion
+;;       (back-to-indentation)
+;;       (setq col (+ 1 (current-column)))
+;;       (set-selective-display
+;;        (if selective-display nil (or col 1))))))
+
+
+;; (use-package shackle
+;;   :ensure t
+;;   :hook (emacs-startup . shackle-mode)
+;;   :config
+;;   (setq shackle-default-alignment 'below
+;;         shackle-default-size 8
+;;         helm-display-function 'pop-to-buffer
+;;         shackle-rules
+;;         '(("^\\*eww" :regexp t :size 0.5 :select t :autokill t :noesc t)
+;;         ;; ("^\\*ftp " :noselect t :autokill t :noesc t)
+;;         ;; ("^\\*pdf" :noselect t :align right)
+;;         ;;(pdf-view-mode :noselect t :align right)
+;;         ;; ("\\`\\*helm.*?\\*\\'" :regexp t :align t :size 0.3)
+;;         ;; built-in (emacs)
+;;         ("*compilation*" :size 0.25 :noselect t :autokill t :autoclose t)
+;;         ("*ert*" :same t :modeline t)
+;;         ("*info*" :size 0.5 :select t :autokill t)
+;;         ("*undo-tree*" :size 0.25 :align right)
+;;         ("*Backtrace*" :size 20 :noselect t)
+;;         ("*Warnings*"  :size 12 :noselect t :autofit t)
+;;         ("*Messages*"  :size 12 :noselect t)
+;;         ("*Help*" :size 0.3 :autokill t)
+;;         ("^\\*.*Shell Command.*\\*$" :regexp t :size 20 :noselect t :autokill t)
+;;         ;; (apropos-mode :size 0.3 :autokill t :autoclose t)
+;;         ;; (Buffer-menu-mode :size 20 :autokill t)
+;;         ;; (comint-mode :noesc t)
+;;         ;; (grep-mode :size 25 :noselect t :autokill t)
+;;         ;; (profiler-report-mode :size 0.3 :regexp t :autokill t :modeline minimal)
+;;         ;; (tabulated-list-mode :noesc t)
+;;         ("^ ?\\*" :regexp t :size 15 :noselect t :autokill t :autoclose t))))
+
+;; (use-package hideshowvis
+;;   :ensure t
+;;   :config
+;;   (progn
+;;     (hideshowvis-enable)
+;;     (hideshowvis-symbols)))
+
+
+
+(message "Init Base script done!")
 (provide 'init-base)

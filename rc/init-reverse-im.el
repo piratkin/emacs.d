@@ -25,7 +25,7 @@
 
 (use-package reverse-im
   :ensure t
-  :after unipunct
+  ;; :after unipunct
   :custom
   (reverse-im-modifiers '(super))
   (reverse-im-input-methods

@@ -1,11 +1,23 @@
+;; Default frame at startup
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+
 ;; Turn off mouse interface early in startup to avoid momentary display
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
 ;; Set dark background
+(set-cursor-color "#282c34")
 (set-background-color "#282c34")
 (set-foreground-color "#a9afaa")
+ (custom-set-faces
+;   '(default ((t (:height 110))))
+   '(fringe ((t (:foreground "#a200ff" :background "#282c34"))))
+   '(window-divider ((t (:foreground "#5d4d7a")))))
+
+
+;; Hide mode-line
+(setq mode-line-format nil)
 
 ;; Set title
 (setq-default
@@ -37,24 +49,23 @@
 ;;      (setq inhibit-startup-echo-area-message (user-login-name)))
 
 ;; Disable garbage collection on initialize
-(setq gc-cons-threshold-original gc-cons-threshold)
-(setq gc-cons-threshold (* 1024 1024 100))
-(defun my-init-gc-optimize ()
-  (setq gc-cons-threshold gc-cons-threshold-original))
-(add-hook 'after-init-hook #'my-init-gc-optimize)
+;; (setq gc-cons-threshold-original gc-cons-threshold)
+(setq gc-cons-threshold most-positive-fixnum)
+(defun init:gc-optimize ()
+  ;; (setq gc-cons-threshold gc-cons-threshold-original)
+  (set 'gc-cons-threshold 100000000))
+(add-hook 'after-init-hook #'init:gc-optimize)
 
-;; Disable garbage collection on minibuffer
-(defun my-minibuffer-setup-hook ()
-  (setq gc-cons-threshold most-positive-fixnum))
-(defun my-minibuffer-exit-hook ()
-  (setq gc-cons-threshold 800000))
-(add-hook 'minibuffer-setup-hook #'my-minibuffer-setup-hook)
-(add-hook 'minibuffer-exit-hook #'my-minibuffer-exit-hook)
+;; ;; Disable garbage collection on minibuffer
+;; (defun my-minibuffer-setup-hook ()
+;;   (setq gc-cons-threshold most-positive-fixnum))
+;; (defun my-minibuffer-exit-hook ()
+;;   (setq gc-cons-threshold 800000))
+;; (add-hook 'minibuffer-setup-hook #'my-minibuffer-setup-hook)
+;; (add-hook 'minibuffer-exit-hook #'my-minibuffer-exit-hook)
 
 ;;; Configure
-(setq mode-line-format nil ; Hide modeline
-      ; Disable automatic loading of packages after the init file
-      package-enable-at-startup nil
+(setq package-enable-at-startup nil ; Disable automatic loading of packages after the init file
       frame-inhibit-implied-resize t ; Does not resize that frame
       inhibit-startup-screen t ; Hide startup message for older version Emacs
       inhibit-startup-message t ; Hide startup message
@@ -63,16 +74,6 @@
 ;; Change startup message
 (defun display-startup-echo-area-message () nil)
 ;; (defun display-startup-echo-area-message () (message ""))
-
-;; Init file for custom settings
-(setq custom-file "~/.emacs.d/custom.el")
-(when (file-exists-p custom-file)
-  (load custom-file))
-
-;; ;;; Start as server
-;; (require 'server)
-;; (unless (server-running-p)
-;;   (server-start))
 
 ;;; Set load path
 (push "~/.dotmacs.d" load-path)

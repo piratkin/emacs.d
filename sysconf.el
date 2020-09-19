@@ -1,3 +1,4 @@
+;; (message "script: %s" "sysconf.el")
 ;;; System hederfile path
 (cond
  ((string-equal system-type "cygwin") ; Microsoft Windows
@@ -18,6 +19,9 @@
  ((string-equal system-type "gnu/linux") ; GNU/Linux
   (progn
     (message "Detected: GNU/Linux")
+    (setenv "GTAGSLIBPATH"
+            (concat "/usr/include:"
+                    "/usr/local/include"))
     ;; (setq find-function-C-source-directory "~/Projects/emacs-25.1/src/")
     (setq sys:c-headers-path-system '(
         "/usr/include/c++/5"

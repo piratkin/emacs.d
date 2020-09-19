@@ -1,4 +1,3 @@
-
 (defun rc:init-dired-conf ()
   (interactive)
   (setq-default
@@ -12,6 +11,9 @@
    (dired-mode . auto-fill-mode)
    ;; (dired-mode . dired-omit-mode)
    (dired-mode . dired-hide-details-mode))
+  :custom
+  ;; Auto refresh Dired, but be quiet about it
+  (global-auto-revert-non-file-buffers t)
   :config
   ;; Dired - reuse current buffer by pressing 'a'
   (put 'dired-find-alternate-file 'disabled nil)
@@ -35,8 +37,10 @@
    ;; Allow editing file permissions in dired (rwx)
    wdired-allow-to-change-permissions t)
   ;;
-  (when (executable-find "fd")
-    (use-package fd-dired))
+ (when (executable-find "fd")
+   (use-package fd-dired
+     :quelpa t))
+
   ;;
   (when (executable-find "gls")
     ;; Use GNU ls as `gls' from `coreutils' if available.
@@ -65,26 +69,27 @@
 ;;   (setq diredp-wrap-around-flag nil))
 
 (use-package dired-avfs
-  :after dired)
+  :quelpa t)
 
 (use-package dired-filter
-  :after dired)
+  :quelpa t)
 
 (use-package dired-open
-  :after dired)
+  :quelpa t)
 
 (use-package dired-collapse
-  :after dired
   :ensure t
+  ;; :after dired
   :hook
   (dired-mode . dired-collapse-mode))
 
 (use-package image-dired
-  :after dired
+  ;; :after dired
   :ensure t)
 
 (use-package dired-subtree
-  :after dired
+  :ensure t
+  ;; :after dired
   :bind
   (;;:map dired-mode-map
    :prefix "C-c t"
@@ -137,6 +142,7 @@
    ("`" . dired-ranger-bookmark-visit)))
 
 (use-package dired-narrow
+  :ensure t
   :commands dired-narrow
   ;; :init
   ;; (bind-key "s" 'dired-narrow dired-mode-map)
@@ -151,8 +157,8 @@
   )
 
 (use-package dired-tagsistant
-  :after dired
-  :quelpa
+  :quelpa t
+  ;; :after dired
   (dired+ :fetcher github :repo "emacsmirror/dired-plus")
   :bind
   (;;:map dired-mode-map
@@ -161,6 +167,7 @@
    :prefix-docstring "Dired tagsistant map."
    ("t" . dired-tagsistant-tag)
    ("s" . dired-tagsistant-tag-symlink)))
+
 
 ;; (use-package dirtree
 ;;   :defer t)
@@ -362,6 +369,17 @@
 ;;   :config
 ;;   (bind-key "<tab>" #'dired-subtree-toggle dired-mode-map)
 ;;   (bind-key "<backtab>" #'dired-subtree-cycle dired-mode-map))
+
+;; Provides a simple UI for customizing dired mode to use different faces and colors.
+;; (use-package diredful
+;;   :load-path "~/src/github/elisp/diredful"
+;;   :config (diredful-mode 1))
+
+;; (use-package dired-async
+;;   :ensure nil
+;;   :init
+;;   (dired-async-mode))
+
 
 
 

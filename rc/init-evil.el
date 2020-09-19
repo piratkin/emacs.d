@@ -20,21 +20,19 @@
         evil-want-keybinding nil
         evil-want-C-u-scroll t
         ;; evil-search-module 'evil-search
-        evil-search-module 'isearch
         ;; evil-ex-substitute-global t
         evil-want-fine-undo 'no
         evil-kill-on-visual-paste nil)
-  :custom
-  (evil-default-cursor '(box "magenta"))
-  (evil-insert-state-cursor '(hollow "#28def0")) ;; green
-  (evil-replace-state-cursor '(hollow "#28def0")) ;; green
-  (evil-operator-state-cursor '(hollow "#28def0")) ;; green
-  (evil-motion-state-cursor '(box "red"))
-  (evil-normal-state-cursor '(box "#eead0e")) ;; yellow
-  (evil-visual-state-cursor '(hollow "#eead0e")) ;; yellow
-  (evil-vsplit-window-right t "like vim's 'splitright'")
-  (evil-split-window-below t  "like vim's 'splitbelow'")
   :config
+  (setq evil-default-cursor '(box "magenta")
+        evil-insert-state-cursor '(hollow "#28def0") ;; green
+        evil-replace-state-cursor '(hollow "#28def0") ;; green
+        evil-operator-state-cursor '(hollow "#28def0") ;; green
+        evil-motion-state-cursor '(box "red")
+        evil-normal-state-cursor '(box "#eead0e") ;; yellow
+        evil-visual-state-cursor '(hollow "#eead0e") ;; yellow
+        evil-vsplit-window-right t
+        evil-split-window-below t)
   (define-key evil-normal-state-map "Y" (kbd "y$"))
   ;; Use escape to quit, and not as a meta-key.
   (define-key evil-normal-state-map [escape] 'keyboard-quit)
@@ -50,29 +48,33 @@
   ;; (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
   ;; (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
   ;; Lazy ex with ';'
-  (define-key evil-normal-state-map ";" 'evil-ex)
-  (define-key evil-visual-state-map ";" 'evil-ex)
+  ;; (define-key evil-normal-state-map ";" 'evil-ex)
+  ;; (define-key evil-visual-state-map ";" 'evil-ex)
+  (define-key evil-normal-state-map ";" 'counsel-M-x)
+  (define-key evil-visual-state-map ";" 'counsel-M-x)
+  (define-key evil-normal-state-map [tab] 'evil-toggle-fold)
   (evil-mode 1))
 
 ;; vim-like keybindings everywhere in emacs
 (use-package evil-collection
-  :after evil
   :ensure t
+  :after (evil)
   :config
+  (setq evil-collection-setup-minibuffer t
+        evil-collection-key-blacklist '("SPC" "gd" "gf"))
   (evil-collection-init))
 
 ;; gl and gL operators, like vim-lion
 (use-package evil-lion
-  :after evil
   :ensure t
+  :after (evil)
   :config
   (evil-lion-mode))
 
 ;; gc operator, like vim-commentary
 (use-package evil-commentary
-  :after evil
   :ensure t
-  :diminish evil-commentary-mode
+  :after (evil)
   :config
   (evil-commentary-mode 1))
 
@@ -87,16 +89,16 @@
 
 ;; like vim-surround
 (use-package evil-surround
-  :after evil
   :ensure t
+  :after (evil)
   :diminish evil-surround-mode
   :config
   (global-evil-surround-mode 1))
 
 ;; visual hints while editing
 (use-package evil-goggles
-  :after evil
   :ensure t
+  :after (evil)
   :config
   (evil-goggles-mode)
 
@@ -107,8 +109,8 @@
   (evil-goggles-use-diff-faces))
 
 (use-package evil-escape
-  :after evil
   :ensure t
+  :after (evil)
   :bind
   (:map evil-insert-state-map
         ("C-g" . evil-escape)
@@ -131,15 +133,14 @@
 
 ;; Evil-indent-textobject, but better
 (use-package evil-indent-plus
-  :after evil
   :ensure t
-  ;; :demand t
+  :after (evil)
   :config
   (evil-indent-plus-default-bindings))
 
 (use-package evil-matchit
-  :after evil
-  :ensure t)
+  :ensure t
+  :after (evil))
 
 ;; (use-package evil-anzu
 ;;   :defer t
@@ -149,12 +150,19 @@
 ;;   (global-anzu-mode +1))
 
 (use-package evil-anzu
-  :after evil
   :quelpa
-  (evil-anzu :fetcher github :repo "syohex/emacs-evil-anzu")
-  :init
+  :after (evil)
+  :config
   ;; (setq anzu-cons-mode-line-p nil)
   (global-anzu-mode t))
+
+;; (use-package evil-anzu
+;;   :after evil
+;;   :quelpa
+;;   (evil-anzu :fetcher github :repo "syohex/emacs-evil-anzu")
+;;   :init
+;;   ;; (setq anzu-cons-mode-line-p nil)
+;;   (global-anzu-mode t))
 
 ;; (setq el-get-sources (append el-get-sources '(
 ;;   (:name evil-anzu

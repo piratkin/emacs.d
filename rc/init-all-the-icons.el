@@ -4,4 +4,6 @@
   :config
   (setq inhibit-compacting-font-caches t))
 
+
+
 (provide 'init-all-the-icons)

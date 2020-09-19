@@ -13,5 +13,9 @@
                                   ("Asia/Shanghai"    "China"))))
 
 
+(use-package counsel-world-clock
+  :ensure t
+  :after counsel)
+
 
 (provide 'init-time)

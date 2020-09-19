@@ -1,6 +1,7 @@
 (use-package paren-face
+  :ensure t
   :hook (prog-mode . paren-face-mode)
-  :init
+  :config
   ;; All "[({" will be silenced.
   (setq paren-face-regexp "[][(){}]"))
 
