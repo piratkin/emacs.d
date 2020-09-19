@@ -8,7 +8,6 @@ eshell
 custom.el
 network-security.data
 projectile-bookmarks.eld
-/usr/
 /cache/
 /bin/
 /rc/-init-*.el
