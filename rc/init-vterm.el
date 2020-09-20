@@ -66,8 +66,8 @@
   :ensure t
   :config
   (setq vterm-use-vterm-prompt-detection-method t
-        vterm-shell "/usr/bin/zsh"
-        vterm-max-scrollback 10000))
+        vterm-shell (if (file-readable-p "/usr/bin/zsh") "/usr/bin/zsh" "/bin/bash")
+        vterm-max-scrollback 100000))
 
 
 
