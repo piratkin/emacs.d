@@ -107,7 +107,7 @@
 ;; (require 'init-fill-column-indicator)
 ;; (require 'init-typit)
 ;; (require 'init-vimish-fold)
-;; (require 'init-hideshow)
+(require 'init-hideshow)
 
 ;; Tested Packages
 ;; (require 'init-highlight-indent-guides)
