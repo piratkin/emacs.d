@@ -78,6 +78,8 @@
    "eY" '(yas-visit-snippet-file :which-key "Snippet visit")
    "ei" '(symbol-overlay-put :which-key "Symbol put")
    "eI" '(symbol-overlay-remove-all :which-key "Symbol remove all")
+   "eH" '(hs-hide-all :which-key "Collapse")
+   "eh" '(hs-show-all :which-key "Expand")
    ;; Jump
    ;; "jj" '(ace-jump-char-mode :which-key "Jump to char")
    ;; "jw" '(ace-window :which-key "Jump to Windows")
