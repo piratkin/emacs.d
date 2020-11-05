@@ -1,7 +1,10 @@
 (use-package ispell
   :ensure t
   :config
-  (setq ispell-program-name "aspell")
+  (setq ispell-program-name "aspell"
+        ispell-personal-dictionary
+        (concat dotmacs-root-directory
+                "usr/ispell/dictionary"))
   (add-to-list 'ispell-extra-args "--sug-mode=ultra")
   ;; (add-to-list 'ispell-extra-args "--run-together")
   (add-to-list 'ispell-extra-args "--lang=en_US"))
