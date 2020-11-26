@@ -42,15 +42,9 @@
   ;;   "Update tag database"
   ;;   (interactive)
   ;;   (gtags-ext-create-or-update))
-  (defun rc:evil-gtags-goto-dwim ()
-    (interactive)
-    (if  (derived-mode-p 'c-mode 'c++-mode)
-        (counsel-gtags-dwim)
-      (evil-goto-definition)))
   ;; (defun rc:evil-gtags-goto-dwim ()
   ;;   (interactive)
-  ;;   (if  (or (eq major-mode 'c-mode)
-  ;;            (eq major-mode 'c++-mode))
+  ;;   (if  (derived-mode-p 'c-mode 'c++-mode)
   ;;       (counsel-gtags-dwim)
   ;;     (evil-goto-definition)))
   (setenv "GTAGSTHROUGH" "true")
@@ -80,7 +74,7 @@
   ;;                             (`idutils "--idutils")))
   ;;                     args)))
   ;;     (mapconcat #'identity (delq nil xs) " ")))
-  (define-key evil-motion-state-map "gd" 'rc:evil-gtags-goto-dwim)
+  ;; (define-key evil-motion-state-map "gd" 'rc:evil-gtags-goto-dwim)
   (setq-local imenu-create-index-function #'ggtags-build-imenu-index)
   (setq ggtags-update-on-save t
         ;; ggtags-global-ignore-case t

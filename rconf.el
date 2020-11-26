@@ -74,8 +74,8 @@
 ;; (require 'init-lsp-mode)
 ;; (require 'init-eglot)
 ;; (require 'init-auto-complete)
-;; (require 'init-ctags)
-(require 'init-ggtags)
+(require 'init-ctags)
+;; (require 'init-ggtags)
 ;; (require 'init-ycmd)
 ;; (require 'init-flycheck)
 
@@ -89,6 +89,7 @@
 (require 'init-expand-region)
 (require 'init-google-translate)
 (require 'init-google-this)
+(require 'init-tramp)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; (require 'init-shell)

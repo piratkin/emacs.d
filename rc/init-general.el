@@ -105,7 +105,8 @@
    "xB" '(Bug-Hunter-Init-file :which-key "Bug hunter init")
    ;; Additionally
    ;; "aa" '(counsel-M-x :which-key "M-x")
-   "aa" '(rc:tags-create-or-update :which-key "Generate TAGS")
+   ;; "aa" '(rc:tags-create-or-update :which-key "Generate TAGS")
+   "aa" '(ctags-update :which-key "Generate TAGS")
    "a+" '(text-scale-increase :which-key "Zoom (+)")
    "a-" '(text-scale-decrease :which-key "Zoom (-)")
    "a=" '(text-scale-adjust :which-key "Zoom (=)")

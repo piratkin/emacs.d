@@ -22,6 +22,8 @@
     (setenv "GTAGSLIBPATH"
             (concat "/usr/include:"
                     "/usr/local/include"))
+
+    (setq-default default-frame-alist '((font . "Source Code Pro-12")))
     ;; (setq find-function-C-source-directory "~/Projects/emacs-25.1/src/")
     (setq sys:c-headers-path-system '(
         "/usr/include/c++/5"
