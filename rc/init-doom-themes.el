@@ -13,7 +13,7 @@
   ;; Hide cursor if window not have focus
   (setq-default cursor-in-non-selected-windows nil)
   ;;use larger font
-  ;; (setq-default default-frame-alist '((font . "Source Code Pro-14")))
+  (setq-default default-frame-alist '((font . "Source Code Pro-14")))
   (window-divider-mode +1))
 
 ;; (set-face-attribute 'fringe nil (:foreground "yellow", :foreground "yellow"))

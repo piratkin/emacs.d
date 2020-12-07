@@ -32,4 +32,4 @@
 
 
 
-(provide 'init-window-number)
+(provide 'init-winum)

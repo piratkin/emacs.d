@@ -655,6 +655,8 @@
                    ("Description" 64 package-menu--description-predicate)])
             (tabulated-list-init-header)))
 
+;--------------------------------------------------
+
 ;; Returns the root directory .dir_locals.el
 (defun rc:dir-locals-dir ()
   "Return the directory local variables directory.
@@ -667,6 +669,8 @@ Code taken from `hack-dir-local-variables'."
      ((consp variables-file)
       (setq dir-name (nth 0 variables-file))))
     dir-name))
+
+;--------------------------------------------------
 
 ;; (use-package insert-translated-name
 ;;   :ensure nil
@@ -694,6 +698,8 @@ Code taken from `hack-dir-local-variables'."
 ;;   ;; ("C-c C-r l" . rotate-layout)
 ;;   )
 
+;--------------------------------------------------
+
 ;; Rename current buffer and file
 (defun rc:rename-current-buffer-file ()
   "Renames current buffer and file it is visiting."
@@ -711,6 +717,8 @@ Code taken from `hack-dir-local-variables'."
           (set-buffer-modified-p nil)
           (message "File '%s' successfully renamed to '%s'"
                    name (file-name-nondirectory new-name)))))))
+
+;--------------------------------------------------
 
 ;; (defun toggle-fold ()
 ;;   "Toggle fold all lines larger than indentation on current line"
@@ -760,6 +768,39 @@ Code taken from `hack-dir-local-variables'."
 ;;   (progn
 ;;     (hideshowvis-enable)
 ;;     (hideshowvis-symbols)))
+
+;; (use-package move-border
+;;   :quelpa (move-border
+;;            :fetcher github
+;;            :repo "ramnes/move-border")
+;;   :bind (("C-M-<up>"    . move-border-up)
+;;          ("C-M-<down>"  . move-border-down)
+;;          ("C-M-<right>" . move-border-right)
+;;          ("C-M-<left>"  . move-border-left)
+
+;; (use-package better-jumper
+;;   :ensure nil
+;;   ;; :config
+;;   ;; (better-jumper-jump-list-struct)
+;;   ;; (better-jumper-mode +1)
+;;   )
+
+;--------------------------------------------------
+
+;; (use-package vterm-toggle
+;;   :ensure t
+;;   ;; :straight (vterm :type git :host github :repo "jixiuf/vterm-toggle")
+;;   ;; :custom
+;;   ;; (vterm-toggle-fullscreen-p nil)
+;;   ;; :bind (
+;;   ;;        ("H-t t" . vterm-toggle)
+;;   ;;        ("H-T" . vterm-toggle-cd)
+;;   ;;        ("H-t d" . vterm-toggle-insert-cd)
+;;   ;;        ("H-t n" . vterm-toggle-forward)
+;;   ;;        ("H-t p" . vterm-toggle-forward)
+;;   ;;        )
+;;   )
+
 
 
 

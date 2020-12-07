@@ -380,6 +380,15 @@
 ;;   :init
 ;;   (dired-async-mode))
 
+;------------------------------------------------
+
+(defun rc:save-buffer ()
+  (interactive)
+  (if (derived-mode-p 'wdired-mode)
+      (wdired-finish-edit)
+    (save-buffer)))
+
+;------------------------------------------------
 
 
 

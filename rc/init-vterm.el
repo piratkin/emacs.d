@@ -53,21 +53,40 @@
 ;;   :config
 ;;   (setq multi-vterm-buffer-name "vterm"))
 
-(use-package multi-vterm
-  :ensure t
-  :after (evil vterm)
-  :config
-  (evil-define-key 'normal vterm-mode-map (kbd ",c") #'multi-vterm)
-  (evil-define-key 'normal vterm-mode-map (kbd ",n") #'multi-vterm-next)
-  (evil-define-key 'normal vterm-mode-map (kbd ",p") #'multi-vterm-prev)
-  (setq multi-vterm-dedicated-window t))
+;; (use-package vterm
+;;   :quelpa t
+;;   :config
+;;   (progn
+;;     (setq vterm-use-vterm-prompt-detection-method t)
+;;     (setq vterm-shell (if (file-readable-p "/usr/bin/zsh") "/usr/bin/zsh" "/bin/bash"))
+;;     (setq vterm-max-scrollback 100000)))
+
+;; (use-package vterm
+;;   :ensure t
+;;   :quelpa (vterm :fetcher github :repo "akermu/emacs-libvterm")
+;;   :config
+;;   (progn
+;;     (setq vterm-use-vterm-prompt-detection-method t)
+;;     (setq vterm-shell (if (file-readable-p "/usr/bin/zsh") "/usr/bin/zsh" "/bin/bash"))
+;;     (setq vterm-max-scrollback 100000)))
 
 (use-package vterm
   :ensure t
   :config
-  (setq vterm-use-vterm-prompt-detection-method t
-        vterm-shell (if (file-readable-p "/usr/bin/zsh") "/usr/bin/zsh" "/bin/bash")
-        vterm-max-scrollback 100000))
+  (progn
+    (setq vterm-use-vterm-prompt-detection-method t)
+    (setq vterm-shell (if (file-readable-p "/usr/bin/zsh") "/usr/bin/zsh" "/bin/bash"))
+    (setq vterm-max-scrollback 100000)))
+
+(use-package multi-vterm
+  :ensure t
+  :config
+  (progn
+    (setq multi-vterm-dedicated-window t)
+    ;; (evil-define-key 'normal vterm-mode-map (kbd ",c") #'multi-vterm)
+    ;; (evil-define-key 'normal vterm-mode-map (kbd ",n") #'multi-vterm-next)
+    ;; (evil-define-key 'normal vterm-mode-map (kbd ",p") #'multi-vterm-prev)
+    (setq multi-vterm-dedicated-window-height (/ (frame-height) 2))))
 
 
 

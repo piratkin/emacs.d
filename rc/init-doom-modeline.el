@@ -31,6 +31,7 @@
   (setq doom-modeline-buffer-modification-icon t
         ;; doom-modeline-icon t
         ;; doom-modeline-modal-icon t
+        doom-modeline-height 34
         doom-modeline-unicode-fallback t
         doom-modeline-bar-width 3))
 

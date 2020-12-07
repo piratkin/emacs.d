@@ -16,15 +16,16 @@
 (use-package evil
   :ensure t
   :init
-  (setq evil-want-integration t ;; This is optional since it's already set to t by default.
-        evil-want-keybinding nil
-        evil-want-C-u-scroll t
+  (setq evil-want-integration t
+        evil-want-keybinding nil)
+  :config
+  (setq evil-want-C-u-scroll t
         ;; evil-search-module 'evil-search
         ;; evil-ex-substitute-global t
-        evil-want-fine-undo 'no
-        evil-kill-on-visual-paste nil)
-  :config
-  (setq evil-default-cursor '(box "magenta")
+        evil-want-fine-undo t
+        evil-kill-on-visual-paste nil
+        ;; cursor color
+        evil-default-cursor '(box "magenta")
         evil-insert-state-cursor '(hollow "#28def0") ;; green
         evil-replace-state-cursor '(hollow "#28def0") ;; green
         evil-operator-state-cursor '(hollow "#28def0") ;; green
@@ -174,6 +175,17 @@
 ;;       (global-anzu-mode t)
 ;; )))))
 
+;; (use-package evil-jumper
+;;   :ensure t
+;;   :after (evil)
+;;   :config
+;;   (progn
+;;     (evil-jumper-mode)))
+
+;; (use-package evil-ediff
+;;   :ensure t
+;;   :config
+;;   (evil-ediff-init))
 
 
 (provide 'init-evil)
