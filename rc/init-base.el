@@ -801,6 +801,30 @@ Code taken from `hack-dir-local-variables'."
 ;;   ;;        )
 ;;   )
 
+;; Qt QML
+(use-package qml-mode
+  :ensure t
+  :mode "\\.qml\\'")
+
+(use-package sql
+  :ensure t
+  :functions sql
+  :mode ("\\.sql\\'" . sql-mode)
+  :config
+  (use-package sql-indent))
+
+;; (setq split-height-threshold nil)
+
+;; ;; Doom theme color from wiki
+;; (require 'color)
+;; (let ((bg (face-attribute 'default :background)))
+;;   (custom-set-faces
+;;    `(company-tooltip ((t (:inherit default :background ,(color-lighten-name bg 2)))))
+;;    `(company-scrollbar-bg ((t (:background ,(color-lighten-name bg 10)))))
+;;    `(company-scrollbar-fg ((t (:background ,(color-lighten-name bg 5)))))
+;;    `(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
+;;    `(company-tooltip-common ((t (:inherit font-lock-constant-face))))))
+
 
 
 

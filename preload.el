@@ -107,12 +107,15 @@
 
 ;; Automatically update packages
 (use-package auto-package-update
- :ensure t
- :config
- (setq auto-package-update-delete-old-versions t
-       auto-package-update-hide-results t
-       auto-package-update-interval 7)
- (auto-package-update-maybe))
+  :ensure t
+  :config
+  (progn
+    (setq auto-package-update-delete-old-versions t)
+    (setq auto-package-update-prompt-before-update t)
+    ;; (setq auto-package-update-hide-results t)
+    (setq auto-package-update-interval 7)
+    ;; (auto-package-update-maybe)
+    ))
 
 (use-package async-bytecomp
  :ensure async
@@ -140,6 +143,28 @@
 ;; Set dotmacs directory's location
 (setq dotmacs-root-directory "~/.dotmacs.d/")
 
+
+(defsubst recentf-add-file (filename)
+  "Add or move FILENAME at the beginning of the recent list.
+Does nothing if the name satisfies any of the `recentf-exclude'
+regexps or predicates."
+  (setq filename (recentf-expand-file-name filename))
+  (message "rescent: %s" (filename))
+  (when (recentf-include-p filename)
+    (recentf-push filename)))
+
+;; (defun rc:test-p (file)
+;;   (interactive)
+;;   (let ((filename (recentf-expand-file-name file)))
+;;     (if (recentf-include-p filename)
+;;         (message "%s -> ON" filename)
+;;       (message "%s -> OFF" filename))))
+;; (rc:test-p "/wrk/c++/dccu.git/.gitignore")
+;; (rc:test-p "/wrk/c++/dccu.git/.git")
+;; (rc:test-p "/wrk/c++/dccu.git/")
+;; (rc:test-p "/wrk/c++/dccu.git")
+;; (rc:test-p "*scratch*")
+
 (use-package recentf
   :ensure t
   :init
@@ -148,19 +173,31 @@
         ;; recentf-max-menu-items 25
         recentf-max-saved-items 1000)
   :config
-  (add-to-list 'recentf-exclude "\\.gz$/")
-  (add-to-list 'recentf-exclude "\\.bak$/")
-  (add-to-list 'recentf-exclude "\\.git/")
-  (add-to-list 'recentf-exclude "\\.gitignore$")
-  (add-to-list 'recentf-exclude "\\.*autoloads\\.el$")
+  ;; (message "%s" recentf-exclude)
+  (add-to-list 'recentf-exclude "\.gz$")
+  (add-to-list 'recentf-exclude "\.bak$")
+  (add-to-list 'recentf-exclude "\.png$")
+  (add-to-list 'recentf-exclude "\.pdf$")
+  (add-to-list 'recentf-exclude "\.svg$")
+  (add-to-list 'recentf-exclude "\.odt$")
+  (add-to-list 'recentf-exclude "\.tmp/")
+  (add-to-list 'recentf-exclude "/\.git/")
+  (add-to-list 'recentf-exclude "/\.git$")
+  (add-to-list 'recentf-exclude "\.gitignore$")
+  (add-to-list 'recentf-exclude ".*autoloads.el$")
+  (add-to-list 'recentf-exclude "\*.*\*")
   (add-to-list 'recentf-exclude "/cache/")
-  (add-to-list 'recentf-exclude "/tmp/")
+  (add-to-list 'recentf-exclude "/build/")
   (add-to-list 'recentf-exclude "/bin/")
-  (add-to-list 'recentf-exclude "/\\.emacs\\.d/")
+  (add-to-list 'recentf-exclude "/\.tmp/")
+  (add-to-list 'recentf-exclude "/\.emacs\.d/")
   (add-to-list 'recentf-exclude "/usr/include/")
   (add-to-list 'recentf-exclude "^/sudo:")
   ;; (global-set-key "\C-x\ \C-r" 'recentf-open-files)
   (recentf-mode 1))
+
+(use-package use-package-ensure-system-package
+  :ensure t)
 
 (use-package bookmark
   :config

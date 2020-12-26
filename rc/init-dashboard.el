@@ -4,6 +4,12 @@
   ;; :diminish dashboard-mode
   ;; :hook (after-init . (lambda () (setq mode-line-format nil))) ; Hide modeline
   :init
+  ;; (set-face-attribute
+  ;;  'dashboard-no-items
+  ;;  nil
+  ;;  :foreground "red"
+  ;;  :weight 'bold
+  ;;  :slant 'italic)
   ;; (setq mode-line-format nil) ; Hide modeline
   (setq dashboard-banner-logo-title nil
         ;; dashboard-image-banner-max-height 50
@@ -18,11 +24,11 @@
                                :height 1.1
                                :v-adjust -0.05
                                :face 'font-lock-keyword-face)
-        dashboard-items '((recents  . 20)
+        dashboard-items '((recents  . 15)
                           ;; (projects . 5)
-                          ;; (agenda . 5)
-                          ;; (bookmarks . 5)
-                          (registers . 5))
+                          ;; (registers . 5)
+                          (agenda . 5)
+                          (bookmarks . 5))
         dashboard-footer-messages '("piratkin@tut.by"))
   (if (< (length command-line-args) 2)
       (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*"))))

@@ -82,11 +82,12 @@
   :ensure t
   :config
   (progn
+    (setq vterm-keymap-exceptions nil)
     (setq multi-vterm-dedicated-window t)
     ;; (evil-define-key 'normal vterm-mode-map (kbd ",c") #'multi-vterm)
     ;; (evil-define-key 'normal vterm-mode-map (kbd ",n") #'multi-vterm-next)
     ;; (evil-define-key 'normal vterm-mode-map (kbd ",p") #'multi-vterm-prev)
-    (setq multi-vterm-dedicated-window-height (/ (frame-height) 2))))
+    (setq multi-vterm-dedicated-window-height (/ (frame-height) 3))))
 
 
 

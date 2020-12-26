@@ -1,22 +1,26 @@
 (use-package helm
   :ensure t
-  :config
+  :init
   (progn
-    (setq helm-locate-fuzzy-match t)
-    (setq helm-buffers-fuzzy-matching t)
     (setq helm-recentf-fuzzy-match t)
     (setq helm-semantic-fuzzy-match t)
-    (setq helm-imenu-fuzzy-match t)
     (setq helm-M-x-fuzzy-match t)
     (setq helm-apropos-fuzzy-match t)
+    (setq helm-M-x-fuzzy-match t)
+    (setq helm-mode-fuzzy-match t)
+    (setq helm-completion-in-region-fuzzy-match t))
+  :config
+  (progn
+    (setq helm-echo-input-in-header-line t)
+    ;; (setq helm-move-to-line-cycle-in-source t)
     (setq helm-full-frame t)
     (setq helm-input-idle-delay 0.05))
   (helm-mode 1))
 
 ;----------------------------------------------------
 
-(use-package helm-unicode
-  :ensure nil)
+;; (use-package helm-unicode
+;;   :ensure nil)
 
 (use-package helm-command
   :ensure nil)
@@ -25,22 +29,34 @@
   :ensure nil)
 
 (use-package helm-locate
-  :ensure nil)
+  :ensure nil
+  :config
+  (progn
+    (setq helm-locate-fuzzy-match t)))
 
 (use-package helm-files
   :ensure nil
   :config
-  (setq helm-ff-search-library-in-sexp t
-        helm-ff-file-name-history-use-recentf t))
+  (progn
+    ;; (setq helm-ff-file-name-history-use-recentf t)
+    (setq helm-ff-search-library-in-sexp t)))
 
 (use-package helm-semantic
-  :ensure nil)
+  :ensure nil
+  ;; :after (semantic)
+  )
 
 (use-package helm-buffers
-  :ensure nil)
+  :ensure nil
+  :config
+  (progn
+    (setq helm-buffers-fuzzy-matching t)))
 
 (use-package helm-imenu
-  :ensure nil)
+  :ensure nil
+  :config
+  (progn
+    (setq helm-imenu-fuzzy-match t)))
 
 (use-package helm-gtags
   :ensure t

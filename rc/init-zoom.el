@@ -108,35 +108,55 @@
 (use-package zoom
   :ensure t
   :config
-  ;; Resize the selected window according to the frame width, for example:
-  ;; 90 columns and 75% of the frame height if the frame width is larger than 1024 pixels;
-  ;; half the frame size otherwise.
-  ;; (defun size-callback ()
-  ;;   (cond ((> (frame-pixel-width) 1280) '(90 . 0.75))
-  ;;         (t                            '(0.5 . 0.5))))
-  ;; (setq zoom-size 'size-callback)
-  (setq zoom-size '(0.618 . 0.618)
-        zoom-minibuffer-preserve-layout nil
-        temp-buffer-resize-mode nil
-        zoom-ignored-major-modes
-        '(which-key-mode
-          ediff-mode
-          undo-tree-mode-major-mode
-          calc-mode
-          speedbar-mode
-          ediff-mode)
-        zoom-ignored-buffer-names
-        '("*which-key*"
-          "*Messages*"
-          "*Diff*")
-        zoom-ignored-buffer-name-regexps
-        '("^*which-key"
-          "^*Messages"
-          "^*magit"
-          "^*magit-diff"
-          "^*Ediff"
-          "^*COMMIT_EDITMSG"))
-  (zoom-mode +1))
+  (progn
+    ;; Resize the selected window according to the frame width, for example:
+    ;; 90 columns and 75% of the frame height if the frame width is larger than 1024 pixels;
+    ;; half the frame size otherwise.
+    ;; (defun size-callback ()
+    ;;   (cond ((> (frame-pixel-width) 1280) '(90 . 0.75))
+    ;;         (t                            '(0.5 . 0.5))))
+    ;; (setq zoom-size 'size-callback)
+    ;; (setq zoom-size '(0.618 . 0.618))
+    (setq zoom-size '(80 . 0.7))
+    (setq zoom-minibuffer-preserve-layout nil)
+    (setq temp-buffer-resize-mode nil)
+    (setq zoom-ignored-major-modes
+          '(which-key-mode
+            gdb-breakpoints-mode
+            gdb-variables-mode
+            gdb-watchers-mode
+            gdb-registers-mode
+            gdb-keys-mode
+            gdb-comint-mode
+            gdb-inferior-io-mode
+            gdb-threads-mode
+            gdb-frames-mode
+            gdb-disassembly-mode
+            gdb--disassembly-data-mode
+            gud-mode
+            comint-mode
+            gdb-parent-mode
+            gdb-frames-mode
+            gdb-locals-mode
+            gdb-breakpoints-mode
+            gdb-inferior-io-mode
+            undo-tree-mode-major-mode
+            calc-mode
+            speedbar-mode
+            ediff-mode))
+    (setq zoom-ignored-buffer-names
+          '("*which-key*"
+            "Debugger"
+            "*Messages*"
+            "*Diff*"))
+    (setq zoom-ignored-buffer-name-regexps
+          '("^*which-key"
+            "^*Messages"
+            "^*magit"
+            "^*magit-diff"
+            "^*Ediff"
+            "^*COMMIT_EDITMSG"))
+    (zoom-mode +1)))
 
 
 

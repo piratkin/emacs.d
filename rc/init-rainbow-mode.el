@@ -1,10 +1,9 @@
 (use-package rainbow-mode
   :ensure t
-  :commands
-  (rainbow-turn-on
-   rainbow-turn-off)
+  ;; TODO: In the c / c ++ programming language,
+  ;;       it paints preprocessor directives!
   :hook
-  ((html-mode css-mode php-mode nxml-mode xml-mode) . rainbow-turn-on))
+  (text-mode))
 
 
 

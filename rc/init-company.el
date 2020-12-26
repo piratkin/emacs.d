@@ -78,64 +78,93 @@
 
 (use-package company
   :ensure t
-  :hook (after-init . global-company-mode)
+  ;; :general ("C-SPC" #'company-complete)
+  ;; :general ("C-SPC" #'company-complete-common)
+  ;; :general ("C-SPC" #'company-complete-selection)
+  ;; :hook
+  ;; (after-init . global-company-mode)
+  ;; :bind
+  ;; (:map company-active-map
+  ;;       ([return] . company-complete-selection)
+  ;;       ([backtab] . company-complete-common)
+  ;;       ([tab] . company-complete))
   :init
-  (message "Init company")
-  (setq company-idle-delay 0.1
-        company-minimum-prefix-length 1
-        company-selection-wrap-around nil
-        company-tooltip-align-annotations t
-        ;; company-require-match 'never
-        ;; company-require-match nil
-        ;; company-require-match t
-        company-tooltip-limit 8
-        completion-ignore-case t
-        company-backends company-backends-text)
-  (custom-set-faces
-   '(company-preview ((t (:background "#282c34" :foreground "DimGray"))))
-   '(company-preview-common ((t (:inherit company-preview :foreground "red"))))
-   '(company-scrollbar-bg ((t (:background "gold"))))
-   ;; '(company-scrollbar-fg ((t (:background "slateblue"))))
-   '(company-scrollbar-fg ((t (:background "red"))))
-   '(company-template-field ((t (:background "yellow" :foreground "black"))))
-   '(company-tooltip ((t (:background "yellow" :foreground "black"))))
-   '(company-tooltip-annotation ((t (:foreground "red4"))))
-   '(company-tooltip-common ((t (:foreground "red"))))
-   '(company-tooltip-selection ((t (:background "orange1"))))
-   '(company-tooltip-mouse ((t (:background "blue" :foreground "white")))))
-  :bind
-  (:map company-active-map
-        ([return] . company-complete-selection)
-        ([backtab] . company-complete-common)
-        ([tab] . company-complete))
+  (progn
+    (setq company-backends company-backends-text)
+    (setq company-idle-delay 0.1)
+    (setq company-minimum-prefix-length 1)
+    (setq company-tooltip-align-annotations t)
+    ;; (setq company-require-match 'never)
+    ;; (setq company-require-match nil)
+    ;; (setq company-require-match t)
+    (setq company-tooltip-limit 7)
+    ;; (setq completion-ignore-case t)
+    (custom-set-faces
+     '(company-preview ((t (:background "#282c34" :foreground "DimGray"))))
+     '(company-preview-common ((t (:inherit company-preview :foreground "red"))))
+     '(company-scrollbar-bg ((t (:background "gold"))))
+     ;; '(company-scrollbar-fg ((t (:background "slateblue"))))
+     '(company-scrollbar-fg ((t (:background "red"))))
+     '(company-template-field ((t (:background "yellow" :foreground "black"))))
+     '(company-tooltip ((t (:background "yellow" :foreground "black"))))
+     '(company-tooltip-annotation ((t (:foreground "red4"))))
+     '(company-tooltip-common ((t (:foreground "red"))))
+     '(company-tooltip-selection ((t (:background "orange1"))))
+     '(company-tooltip-mouse ((t (:background "blue" :foreground "white"))))))
   :config
-  (setq company-transformers '(company-sort-by-backend-importance)
-        company-frontends '(;company-pseudo-tooltip-frontend
-                            company-pseudo-tooltip-unless-just-one-frontend-with-delay
-                            company-echo-metadata-frontend
-                            company-preview-frontend)))
+  (progn
+    ;; todo: fix autocomplete without tooltip
+    ;; (setq company-frontends
+    ;;       '(company-pseudo-tooltip-unless-just-one-frontend-with-delay
+    ;;         company-preview-common-frontend))
+    (setq company-frontends
+          '(company-pseudo-tooltip-frontend))
+    (setq company-transformers '(company-sort-by-backend-importance))
+;; company-uninstall-map
+;; company-install-map
+;; company-search-map
+    ;; (setq company-auto-commit t)
+    ;; (setq company-selection-wrap-around t)
+    ;(setq evil-complete-next-func 'company-complete-common-or-cycle)
+    ;(setq evil-complete-previous-func 'company-complete-common-or-cycle)
+    (setq company-global-modes '(not magit-mode gud-mode))
+    (global-company-mode)
+    ;; (global-set-key (kbd "TAB") #'company-indent-or-complete-common)
+    ;; (global-set-key [tab] 'tab-indent-or-complete)
+    ;; company-complete-common -> Insert the common part of all candidates.
+    ;; company-complete-selection -> Insert the selected candidate.
+    ;; company-complete-common-or-cycle -> Insert the common part of all candidates, or select the next one
+    ;; company-select-next-if-tooltip-visible-or-complete-selection
+    ;; company-complete -> TAB
+;; company-active-map
+;;     RET
+;;     SPC
+;;     M-SPC
+    ))
+
+(use-package company-quickhelp
+  :ensure t
+  :after (company)
+  :config
+  (company-quickhelp-mode))
 
 (use-package company-dabbrev
   :ensure nil
   :after (company)
-  :init
-  (setq company-dabbrev-other-buffers 'all
-        company-dabbrev-minimum-length 2
-        ;; company-dabbrev-ignore-buffers "nil"
-        ;; company-dabbrev-ignore-case nil
-        company-dabbrev-downcase nil)
   :config
-  (message "Init company-dabbrev"))
+  (progn
+    (setq company-dabbrev-minimum-length 2)
+    (setq company-dabbrev-ignore-case nil)
+    (setq company-dabbrev-downcase case-replace)))
 
 (use-package company-dabbrev-code
   :ensure nil
   :after (company)
-  :init
-  (setq company-dabbrev-code-modes t
-        company-dabbrev-code-ignore-case nil
-        company-dabbrev-code-everywhere t)
   :config
-  (message "Init company-dabbrev-code"))
+  (progn
+    (setq company-dabbrev-code-modes t)
+    (setq company-dabbrev-code-ignore-case nil)
+    (setq company-dabbrev-code-everywhere t)))
 
 (use-package company-dict
   :ensure t
@@ -225,24 +254,23 @@
 ;;   :ensure t
 ;;   :hook (company-mode . company-prescient-mode))
 
-(use-package company-statistics
-  :ensure t
-  :after (company)
-  :hook (company-mode . company-statistics-mode)
-  :init
-  (setq company-statistics-file
-        (concat dotmacs-root-directory
-                "cache/company-statistics-cache.el"))
-  :config
-  (add-to-list 'company-transformers 'company-sort-by-statistics t)
-  (message "Init company-statistics"))
+;; (use-package company-statistics
+;;   :ensure t
+;;   :after (company)
+;;   :hook (company-mode . company-statistics-mode)
+;;   :init
+;;   (setq company-statistics-file
+;;         (concat dotmacs-root-directory
+;;                 "cache/company-statistics-cache.el"))
+;;   :config
+;;   (add-to-list 'company-transformers 'company-sort-by-statistics t)
+;;   (message "Init company-statistics"))
 
 ;; (use-package company-flx
 ;;   :ensure t
 ;;   :after (company)
 ;;   :config
 ;;   (company-flx-mode +1))
-
 
 
 

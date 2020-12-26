@@ -25,6 +25,7 @@
 (require 'init-helm)
 (require 'init-popup)
 (require 'init-windmove)
+(require 'init-windswap)
 (require 'init-base) ;; todo; clean and muve to basic section
 ;; (require 'init-font-lock) ; switch to tree-sitter
 ;; (require 'init-ivy) ; switch to helm
@@ -63,6 +64,7 @@
 (require 'init-time)
 (require 'init-editorconfig)
 (require 'init-git-timemachine)
+(require 'init-magit)
 (require 'init-markdown)
 (require 'init-nginx-mode)
 (require 'init-cmake-mode)
@@ -92,6 +94,7 @@
 (require 'init-google-translate)
 (require 'init-google-this)
 (require 'init-tramp)
+(require 'init-gdb)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; (require 'init-shell)
