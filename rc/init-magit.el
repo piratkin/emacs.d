@@ -6,9 +6,9 @@
 ;;       :bind ("C-c C-g b" . magit-blame-mode))
 
 (use-package magit
-  ;; :ensure t
-  :ensure-system-package
-  ((git . "yay -S git"))
+  :ensure t
+  ;; :ensure-system-package
+  ;; ((git . "yay -S git"))
   ;; :bind
   ;; (("C-x g" . magit-status))
   ;; :hook

@@ -227,6 +227,10 @@ regexps or predicates."
 
 (use-package server
   :ensure t
+  :init
+  (require 'server)
+ (and (>= emacs-major-version 23)
+     (defun server-ensure-safe-dir (dir) "Noop" t))
   :config
   (unless (server-running-p)
     (server-start)))
